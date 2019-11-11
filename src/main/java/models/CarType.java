@@ -1,0 +1,5 @@
+package models;
+
+public enum CarType {
+    SEDAN, COUPE, CONVERTIBLE, HATCHBACK, WAGON, TRUCK, CROSSOVER, MINIVAN, VAN
+}
