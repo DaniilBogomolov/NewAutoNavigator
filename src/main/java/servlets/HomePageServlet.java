@@ -9,6 +9,7 @@ import repository.interfaces.CarsRepository;
 import repository.interfaces.MakersRepository;
 import repository.implementations.MakersRepositoryImpl;
 import repository.interfaces.TransmissionsRepository;
+import services.CarsService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +27,7 @@ public class HomePageServlet extends HttpServlet {
     private MakersRepository makersRepository;
     private CarsRepository carsRepository;
     private TransmissionsRepository transmissionsRepository;
+    private CarsService carsService;
 
     @Override
     public void init() {
@@ -35,6 +37,7 @@ public class HomePageServlet extends HttpServlet {
         getServletContext().setAttribute("cfg", cfg);
         makersRepository = new MakersRepositoryImpl();
         carsRepository = new CarsRepositoryImpl();
+        carsService = new CarsService();
         transmissionsRepository = new TransmissionsRepositoryImpl();
     }
 
@@ -51,8 +54,10 @@ public class HomePageServlet extends HttpServlet {
         List<Transmission> transmissions = transmissionsRepository.getAll().stream().filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 //        System.out.println(makers.toString());
 //        System.out.println(types.toString());
-        List<Car> cars = getCars();
-        root.put("cars", cars);
+        if (request.getServletContext().getAttribute("cars") != null) {
+            List<Car> cars = (List<Car>) request.getServletContext().getAttribute("cars");
+            root.put("cars", cars);
+        }
         root.put("types", types);
         root.put("makers", makers);
         root.put("transmissions", transmissions);
@@ -61,16 +66,4 @@ public class HomePageServlet extends HttpServlet {
     }
 
 
-    private List<Car> getCars() {
-        List<Car> cars = new ArrayList<>();
-        Car firstCar = new Car("Chevrolet_Niva.png");
-        Car secondCar = new Car("Kia_Rio.png");
-        Car thirdCar = new Car("Renault_Duster.png");
-        Car forthCar = new Car("Toyota_Camry.png");
-        cars.add(firstCar);
-        cars.add(secondCar);
-        cars.add(thirdCar);
-        cars.add(forthCar);
-        return cars;
-    }
 }

@@ -56,7 +56,16 @@ public class AdminAddCarServlet extends HttpServlet {
         Maker carMaker = makersRepository.getMakerByName(maker);
         Model carModel = modelsRepository.getModelByName(model);
 
-        Car car = new Car(carMaker, carModel, year, avgPrice, carEngine, carTransmission, capacity, CarType.valueOf(type));
+        Car car = new CarBuilder()
+                .setMaker(carMaker)
+                .setModel(carModel)
+                .setYear(year)
+                .setAvgPrice(avgPrice)
+                .setEngine(carEngine)
+                .setTransmission(carTransmission)
+                .setCapacity(capacity)
+                .setType(CarType.valueOf(type))
+                .createCar();
         carsRepository.save(car);
         doGet(req, resp);
     }

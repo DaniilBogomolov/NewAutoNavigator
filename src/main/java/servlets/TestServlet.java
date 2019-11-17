@@ -1,5 +1,6 @@
 package servlets;
 
+import models.Car;
 import services.CarsService;
 
 import javax.servlet.ServletException;
@@ -8,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.List;
 
 @WebServlet("/test")
 public class TestServlet extends HttpServlet {
@@ -33,7 +34,9 @@ public class TestServlet extends HttpServlet {
             String[] parameterParts = parameters.nextElement().split("-");
             service.addClause(parameterParts[0], parameterParts[1]);
         }
-        System.out.println(service.getCarsQuery());
+        List<Car> cars = service.getCars();
+        cars.stream().map(Car::getImagePath).forEach(System.out::println);
+        req.getServletContext().setAttribute("cars", cars);
         resp.sendRedirect("/home");
     }
 }

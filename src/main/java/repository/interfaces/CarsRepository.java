@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CarsRepository extends CrudRepository<Car> {
     List<CarType> getAllTypes();
+    List<Car> getCarsWithCustomScript(String sqlScript);
 }

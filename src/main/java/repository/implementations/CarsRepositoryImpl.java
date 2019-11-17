@@ -15,9 +15,14 @@ import java.util.Optional;
 
 public class CarsRepositoryImpl implements CarsRepository {
 
-//    private RowMapper<Car> rowMapper = (row) -> {
-//
-//    };
+    private RowMapper<Car> rowMapper = (row) -> {
+        Long id = row.getLong("id");
+        String imagePath = row.getString("img_src");
+        return new CarBuilder()
+                .setId(id)
+                .setImagePath(imagePath)
+                .createCar();
+    };
 
 
     @Override
@@ -72,6 +77,24 @@ public class CarsRepositoryImpl implements CarsRepository {
     @Override
     public void delete(Long id) {
 
+    }
+
+    @Override
+    public List<Car> getCarsWithCustomScript(String sqlScript) {
+        List<Car> cars = new ArrayList<>();
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement(sqlScript);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Car car = rowMapper.mapRow(result);
+                cars.add(car);
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        return cars;
     }
 
     @Override

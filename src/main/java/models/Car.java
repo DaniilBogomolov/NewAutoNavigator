@@ -22,6 +22,31 @@ public class Car {
         this.imagePath = imagePath;
     }
 
+    public Car(Maker maker, Model model, Integer year, Integer avgPrice, Engine engine, Transmission transmission, Integer capacity, CarType type, String imagePath) {
+        this.maker = maker;
+        this.model = model;
+        this.year = year;
+        this.avgPrice = avgPrice;
+        this.engine = engine;
+        this.transmission = transmission;
+        this.capacity = capacity;
+        this.type = type;
+        this.imagePath = imagePath;
+    }
+
+    public Car(Long id, Maker maker, Model model, Integer year, Integer avgPrice, Engine engine, Transmission transmission, Integer capacity, CarType type, String imagePath) {
+        this.id = id;
+        this.maker = maker;
+        this.model = model;
+        this.year = year;
+        this.avgPrice = avgPrice;
+        this.engine = engine;
+        this.transmission = transmission;
+        this.capacity = capacity;
+        this.type = type;
+        this.imagePath = imagePath;
+    }
+
     public Car(Maker maker, Model model, Integer year, Integer avgPrice, Engine engine, Transmission transmission, Integer capacity, CarType type) {
         this.maker = maker;
         this.model = model;

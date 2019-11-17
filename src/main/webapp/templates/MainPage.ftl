@@ -167,7 +167,8 @@
                     <#list makers as maker>
                         <div class="form-check" align="left">
                             <label for="${maker.id}">
-                                <input type="checkbox" name="maker-${maker.id}" class="form-check-input" id="${maker.id}">${maker.makerName}
+                                <input type="checkbox" name="maker_id-${maker.id}" class="form-check-input"
+                                       id="${maker.id}">${maker.makerName}
                             </label>
                             <br>
                         </div>
@@ -221,7 +222,8 @@
                     <#list transmissions as transmission>
                         <div class="form-check" align="left">
                             <label for="${transmission.id}">
-                                <input type="checkbox" class="form-check-input" name="transmission-${transmission.id}" id="${transmission.id}">${transmission.name}
+                                <input type="checkbox" class="form-check-input" name="transmission-${transmission.id}"
+                                       id="${transmission.id}">${transmission.name}
                             </label>
                             <br>
                         </div>
@@ -255,30 +257,37 @@
     </form>
 
     <div id="content">
-        <div id="top-left" style="float: left; height: 50%; width: 50%">
-            <a href="#">
-                <#--                <img style="width: 80%" height="300px" src="../images/cars/Renault_Duster.png">-->
-                <img style="width: 80%" height="300px" src="../images/cars/${cars[0].imagePath}">
-            </a>
-        </div>
-        <div id="top-right" style="float: right; height: 50%; width: 50%">
-            <a href="#">
-                <#--                <img style="width: 80%" height="300px" src="../images/cars/Kia_Rio.png">-->
-                <img style="width: 80%" height="300px" src="../images/cars/${cars[1].imagePath}">
-            </a>
-        </div>
-        <div id="bottom-left" style="float: left; height: 50%; width: 50%">
-            <a href="#">
-                <#--                <img style="width: 80%" height="300px" src="../images/cars/Toyota_Camry.png">-->
-                <img style="width: 80%" height="300px" src="../images/cars/${cars[2].imagePath}">
-            </a>
-        </div>
-        <div id="bottom-right" style="float: right; height: 50%; width: 50%">
-            <a href="#">
-                <#--                <img style="width: 80%" height="300px" src="../images/cars/Chevrolet_Niva.png">-->
-                <img style="width: 80%" height="300px" src="../images/cars/${cars[3].imagePath}">
-            </a>
-        </div>
+        <#if cars??>
+            <div id="top-left" style="float: left; height: 50%; width: 50%"><#if cars[0]??>
+                <a href="/cars/${cars[0].id}">
+                    <#--                <img style="width: 80%" height="300px" src="../images/cars/Renault_Duster.png">-->
+
+                        <img style="width: 80%" height="300px" src="../images/cars/${cars[0].imagePath}">
+
+                </a></#if>
+            </div>
+            <div id="top-right" style="float: right; height: 50%; width: 50%"><#if cars[1]??>
+                <a href="/cars/${cars[1].id}">
+                    <#--                <img style="width: 80%" height="300px" src="../images/cars/Kia_Rio.png">-->
+
+                        <img style="width: 80%" height="300px" src="../images/cars/${cars[1].imagePath}">
+                </a></#if>
+            </div>
+            <div id="bottom-left" style="float: left; height: 50%; width: 50%"><#if cars[2]??>
+                <a href="/cars/${cars[2].id}">
+
+                    <#--                <img style="width: 80%" height="300px" src="../images/cars/Toyota_Camry.png">-->
+                        <img style="width: 80%" height="300px" src="../images/cars/${cars[2].imagePath}">
+                </a></#if>
+            </div>
+            <div id="bottom-right" style="float: right; height: 50%; width: 50%"><#if cars[3]??>
+                <a href="/cars/${cars[3].id}">
+                    <#--                <img style="width: 80%" height="300px" src="../images/cars/Chevrolet_Niva.png">-->
+                        <img style="width: 80%" height="300px" src="../images/cars/${cars[3].imagePath}">
+                </a>
+                </#if>
+            </div>
+        </#if>
     </div>
 </div>
 

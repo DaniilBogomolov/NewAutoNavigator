@@ -1,12 +1,15 @@
 package services;
 
+import models.Car;
 import repository.implementations.CarsRepositoryImpl;
 import repository.interfaces.CarsRepository;
+
+import java.util.List;
 
 public class CarsService {
 
 
-    private String carsQuery = "select * from cars";
+    private String carsQuery = "select * from car";
     private boolean noClauses = true;
     private String lastClause = "";
 
@@ -20,7 +23,7 @@ public class CarsService {
     public void addClause(String type, String value) {
         StringBuilder builder = new StringBuilder(carsQuery);
         if (noClauses) {
-            builder.append(" where (");
+            builder.append(" where ");
             noClauses = false;
             lastClause = type;
         } else {
@@ -35,6 +38,11 @@ public class CarsService {
         carsQuery = builder.toString();
     }
 
+
+    public List<Car> getCars() {
+        System.out.println(carsQuery + " limit 4");
+        return carsRepository.getCarsWithCustomScript(carsQuery + " limit 4");
+    }
 
     public String getCarsQuery() {
         return carsQuery;
