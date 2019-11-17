@@ -13,6 +13,9 @@
             }
             document.getElementById(a).style.display = "block";
         }
+        function updateTextInput(val) {
+            document.getElementById('textInput').value=val;
+        }
     </script>
 </head>
 
@@ -147,12 +150,13 @@
                 <dd id="active-year" class="active" style="display: none">
                     <div id="year-container">
                         <div class="slider-control"><label>Year</label>
-                            <form>
-                                <div class="form-group">
-                                    <label for="formControlRange">2002 to 2019</label>
-                                    <input type="range" class="form-control-range" id="formControlRange">
-                                </div>
-                            </form>
+                            <div>
+<#--                                <label for="year">Year</label>-->
+<#--                                <input type="range" id="start" name="year-"-->
+<#--                                       min="2002" max="2019">-->
+<#--                                <input type="range" name="year-" min="2002" max="2019" onchange="updateTextInput(this.value);">-->
+<#--                                <input type="text" name="year-" id="textInput" value="">-->
+                            </div>
                         </div>
                     </div>
                 </dd>
@@ -174,7 +178,7 @@
                         </div>
                     </#list>
                 </dd>
-                <#--            Price-->
+                <#--Price-->
                 <dt><a href="#">
                         <button type="button" class="btn btn-secondary btn-lg btn-block"
                                 onclick="displayDD('active-price')">Price
@@ -196,7 +200,7 @@
                 <#list types as type>
                     <div class="form-check" align="left">
                         <label for="type">
-                            <input type="checkbox" class="form-check-input" id="type">${type.type}
+                            <input type="checkbox" class="form-check-input" name="type-" id="type">${type.type}
                         </label>
                         <br>
                     </div>
@@ -246,10 +250,15 @@
                         </button>
                         <span style="display: none;"></span></a></dt>
                 <dd id="active-capacity" class="active" style="display: none">
-                    <div id="year-container">
-                        <div class="slider-control">
-                            <label>Capacity</label>
+                    <#list capacities as cap>
+                        <div class="form-check" align="left">
+                            <label for="${cap}">
+                                <input type="checkbox" class="form-check-input" name="capacity-${cap}"
+                                       id="${cap}">${cap}
+                            </label>
+                            <br>
                         </div>
+                    </#list>
                 </dd>
             </dl>
             <button type="submit">Submit</button>
@@ -260,31 +269,31 @@
         <#if cars??>
             <div id="top-left" style="float: left; height: 50%; width: 50%"><#if cars[0]??>
                 <a href="/cars/${cars[0].id}">
-                    <#--                <img style="width: 80%" height="300px" src="../images/cars/Renault_Duster.png">-->
+                <#--                <img style="width: 80%" height="300px" src="../images/cars/Renault_Duster.png">-->
 
-                        <img style="width: 80%" height="300px" src="../images/cars/${cars[0].imagePath}">
+                    <img style="width: 80%" height="300px" src="../images/cars/${cars[0].imagePath}">
 
-                </a></#if>
+                    </a></#if>
             </div>
             <div id="top-right" style="float: right; height: 50%; width: 50%"><#if cars[1]??>
                 <a href="/cars/${cars[1].id}">
-                    <#--                <img style="width: 80%" height="300px" src="../images/cars/Kia_Rio.png">-->
+                <#--                <img style="width: 80%" height="300px" src="../images/cars/Kia_Rio.png">-->
 
-                        <img style="width: 80%" height="300px" src="../images/cars/${cars[1].imagePath}">
-                </a></#if>
+                    <img style="width: 80%" height="300px" src="../images/cars/${cars[1].imagePath}">
+                    </a></#if>
             </div>
             <div id="bottom-left" style="float: left; height: 50%; width: 50%"><#if cars[2]??>
                 <a href="/cars/${cars[2].id}">
 
-                    <#--                <img style="width: 80%" height="300px" src="../images/cars/Toyota_Camry.png">-->
-                        <img style="width: 80%" height="300px" src="../images/cars/${cars[2].imagePath}">
-                </a></#if>
+                <#--                <img style="width: 80%" height="300px" src="../images/cars/Toyota_Camry.png">-->
+                    <img style="width: 80%" height="300px" src="../images/cars/${cars[2].imagePath}">
+                    </a></#if>
             </div>
             <div id="bottom-right" style="float: right; height: 50%; width: 50%"><#if cars[3]??>
-                <a href="/cars/${cars[3].id}">
-                    <#--                <img style="width: 80%" height="300px" src="../images/cars/Chevrolet_Niva.png">-->
+                    <a href="/cars/${cars[3].id}">
+                        <#--                <img style="width: 80%" height="300px" src="../images/cars/Chevrolet_Niva.png">-->
                         <img style="width: 80%" height="300px" src="../images/cars/${cars[3].imagePath}">
-                </a>
+                    </a>
                 </#if>
             </div>
         </#if>

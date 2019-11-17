@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @WebServlet("/home")
 public class HomePageServlet extends HttpServlet {
@@ -52,12 +53,16 @@ public class HomePageServlet extends HttpServlet {
         List<Maker> makers = makersRepository.getAll().stream().filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
         List<CarType> types = carsRepository.getAll().stream().filter(Optional::isPresent).map(Optional::get).map(Car::getType).collect(Collectors.toList());
         List<Transmission> transmissions = transmissionsRepository.getAll().stream().filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
+        List<Integer> years = IntStream.range(2002, 2020).boxed().collect(Collectors.toList());
+        List<Integer> capacity = IntStream.of(2, 4, 5, 6, 7).boxed().collect(Collectors.toList());
 //        System.out.println(makers.toString());
 //        System.out.println(types.toString());
         if (request.getServletContext().getAttribute("cars") != null) {
             List<Car> cars = (List<Car>) request.getServletContext().getAttribute("cars");
             root.put("cars", cars);
         }
+        root.put("capacities", capacity);
+        root.put("years", years);
         root.put("types", types);
         root.put("makers", makers);
         root.put("transmissions", transmissions);
