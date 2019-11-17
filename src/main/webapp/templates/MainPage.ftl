@@ -135,141 +135,147 @@
 </nav>
 <div id="container">
     <#--    MENU-->
-    <div id="menu">
-        <dl>
-            <dt><a href="#">
-                    <button id="menuButton" type="button" class="btn btn-secondary btn-lg btn-block"
-                            onclick="displayDD('active-year')">
-                        Year
-                    </button>
-                    <span style="display: none;"></span></a></dt>
-            <dd id="active-year" class="active" style="display: none">
-                <div id="year-container">
-                    <div class="slider-control"><label>Year</label>
-                        <form>
-                            <div class="form-group">
-                                <label for="formControlRange">2002 to 2019</label>
-                                <input type="range" class="form-control-range" id="formControlRange">
-                            </div>
-                        </form>
+    <form method="post" action="/test">
+        <div id="menu">
+            <dl>
+                <dt><a href="#">
+                        <button id="menuButton" type="button" class="btn btn-secondary btn-lg btn-block"
+                                onclick="displayDD('active-year')">
+                            Year
+                        </button>
+                        <span style="display: none;"></span></a></dt>
+                <dd id="active-year" class="active" style="display: none">
+                    <div id="year-container">
+                        <div class="slider-control"><label>Year</label>
+                            <form>
+                                <div class="form-group">
+                                    <label for="formControlRange">2002 to 2019</label>
+                                    <input type="range" class="form-control-range" id="formControlRange">
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </dd>
-            <#--            Make-->
-            <dt><a href="#">
-                    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="displayDD('active-make')">
-                        Make
-                    </button>
-                    <span style="display: none;"></span></a></dt>
-            <dd id="active-make" class="active" style="display: none">
-                <#list makers as maker>
+                </dd>
+                <#--            Make-->
+                <dt><a href="#">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block"
+                                onclick="displayDD('active-make')">
+                            Make
+                        </button>
+                        <span style="display: none;"></span></a></dt>
+                <dd id="active-make" class="active" style="display: none">
+                    <#list makers as maker>
+                        <div class="form-check" align="left">
+                            <label for="${maker.id}">
+                                <input type="checkbox" name="maker-${maker.id}" class="form-check-input" id="${maker.id}">${maker.makerName}
+                            </label>
+                            <br>
+                        </div>
+                    </#list>
+                </dd>
+                <#--            Price-->
+                <dt><a href="#">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block"
+                                onclick="displayDD('active-price')">Price
+                        </button>
+                        <span style="display: none;"></span></a></dt>
+                <dd id="active-price" class="active" style="display: none">
+                    <div class="form-group">
+                        <label for="formControlRange">0 to 62300000</label>
+                        <input type="range" class="form-control-range" id="formControlRange">
+                    </div>
+                </dd>
+                <#--            Type-->
+                <dt><a href="#">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block"
+                                onclick="displayDD('active-type')">
+                            Type
+                        </button>
+                        <span style="display: none;"></span></a></dt>
+                <#list types as type>
                     <div class="form-check" align="left">
-                        <label for="${maker.id}">
-                            <input type="checkbox" class="form-check-input" id="${maker.id}">${maker.makerName}
+                        <label for="type">
+                            <input type="checkbox" class="form-check-input" id="type">${type.type}
                         </label>
                         <br>
                     </div>
                 </#list>
-            </dd>
-            <#--            Price-->
-            <dt><a href="#">
-                    <button type="button" class="btn btn-secondary btn-lg btn-block"
-                            onclick="displayDD('active-price')">Price
-                    </button>
-                    <span style="display: none;"></span></a></dt>
-            <dd id="active-price" class="active" style="display: none">
-                <div class="form-group">
-                    <label for="formControlRange">0 to 62300000</label>
-                    <input type="range" class="form-control-range" id="formControlRange">
-                </div>
-            </dd>
-            <#--            Type-->
-            <dt><a href="#">
-                    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="displayDD('active-type')">
-                        Type
-                    </button>
-                    <span style="display: none;"></span></a></dt>
-                        <#list types as type>
-                            <div class="form-check" align="left">
-                                <label for="type">
-                                    <input type="checkbox" class="form-check-input" id="type">${type.type}
-                                </label>
-                                <br>
-                            </div>
-                        </#list>
-            </dd>
-            <dt><a href="#">
-                    <button type="button" class="btn btn-secondary btn-lg btn-block"
-                            onclick="displayDD('active-engine')">Engine
-                    </button>
-                    <span style="display: none;"></span></a></dt>
-            <dd id="active-engine" class="active" style="display: none">
-                <div id="year-container">
-                    <div class="slider-control">
-                        <label>Engine</label>
-                    </div>
-            </dd>
-            <dt><a href="#">
-                    <button type="button" class="btn btn-secondary btn-lg btn-block"
-                            onclick="displayDD('active-transmission')">Transmission
-                    </button><span style="display: none;"></span></a></dt>
-            <dd id="active-transmission" class="active" style="display: none">
-                <#list transmissions as transmission>
-                    <div class="form-check" align="left">
-                        <label for="${transmission.id}">
-                            <input type="checkbox" class="form-check-input" id="${transmission.id}">${transmission.name}
-                        </label>
-                        <br>
-                    </div>
-                </#list>
-            </dd>
-            <dt><a href="#">
-                    <button type="button" class="btn btn-secondary btn-lg btn-block"
-                            onclick="displayDD('active-perfomance')">Perfomance
-                    </button>
-                    <span style="display: none;"></span></a></dt>
-            <dd id="active-perfomance" class="active" style="display: none">
-                <div id="year-container">
-                    <div class="slider-control">
-                        <label>Perfomance</label>
-                    </div>
-            </dd>
-            <dt><a href="#">
-                    <button type="button" class="btn btn-secondary btn-lg btn-block"
-                            onclick="displayDD('active-capacity')">Capacity
-                    </button>
-                    <span style="display: none;"></span></a></dt>
-            <dd id="active-capacity" class="active" style="display: none">
-                <div id="year-container">
-                    <div class="slider-control">
-                        <label>Capacity</label>
-                    </div>
-            </dd>
-        </dl>
-    </div>
+                </dd>
+                <dt><a href="#">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block"
+                                onclick="displayDD('active-engine')">Engine
+                        </button>
+                        <span style="display: none;"></span></a></dt>
+                <dd id="active-engine" class="active" style="display: none">
+                    <div id="year-container">
+                        <div class="slider-control">
+                            <label>Engine</label>
+                        </div>
+                </dd>
+                <dt><a href="#">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block"
+                                onclick="displayDD('active-transmission')">Transmission
+                        </button>
+                        <span style="display: none;"></span></a></dt>
+                <dd id="active-transmission" class="active" style="display: none">
+                    <#list transmissions as transmission>
+                        <div class="form-check" align="left">
+                            <label for="${transmission.id}">
+                                <input type="checkbox" class="form-check-input" name="transmission-${transmission.id}" id="${transmission.id}">${transmission.name}
+                            </label>
+                            <br>
+                        </div>
+                    </#list>
+                </dd>
+                <dt><a href="#">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block"
+                                onclick="displayDD('active-perfomance')">Perfomance
+                        </button>
+                        <span style="display: none;"></span></a></dt>
+                <dd id="active-perfomance" class="active" style="display: none">
+                    <div id="year-container">
+                        <div class="slider-control">
+                            <label>Perfomance</label>
+                        </div>
+                </dd>
+                <dt><a href="#">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block"
+                                onclick="displayDD('active-capacity')">Capacity
+                        </button>
+                        <span style="display: none;"></span></a></dt>
+                <dd id="active-capacity" class="active" style="display: none">
+                    <div id="year-container">
+                        <div class="slider-control">
+                            <label>Capacity</label>
+                        </div>
+                </dd>
+            </dl>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
 
     <div id="content">
         <div id="top-left" style="float: left; height: 50%; width: 50%">
             <a href="#">
-<#--                <img style="width: 80%" height="300px" src="../images/cars/Renault_Duster.png">-->
+                <#--                <img style="width: 80%" height="300px" src="../images/cars/Renault_Duster.png">-->
                 <img style="width: 80%" height="300px" src="../images/cars/${cars[0].imagePath}">
             </a>
         </div>
         <div id="top-right" style="float: right; height: 50%; width: 50%">
             <a href="#">
-<#--                <img style="width: 80%" height="300px" src="../images/cars/Kia_Rio.png">-->
+                <#--                <img style="width: 80%" height="300px" src="../images/cars/Kia_Rio.png">-->
                 <img style="width: 80%" height="300px" src="../images/cars/${cars[1].imagePath}">
             </a>
         </div>
         <div id="bottom-left" style="float: left; height: 50%; width: 50%">
             <a href="#">
-<#--                <img style="width: 80%" height="300px" src="../images/cars/Toyota_Camry.png">-->
+                <#--                <img style="width: 80%" height="300px" src="../images/cars/Toyota_Camry.png">-->
                 <img style="width: 80%" height="300px" src="../images/cars/${cars[2].imagePath}">
             </a>
         </div>
         <div id="bottom-right" style="float: right; height: 50%; width: 50%">
             <a href="#">
-<#--                <img style="width: 80%" height="300px" src="../images/cars/Chevrolet_Niva.png">-->
+                <#--                <img style="width: 80%" height="300px" src="../images/cars/Chevrolet_Niva.png">-->
                 <img style="width: 80%" height="300px" src="../images/cars/${cars[3].imagePath}">
             </a>
         </div>
