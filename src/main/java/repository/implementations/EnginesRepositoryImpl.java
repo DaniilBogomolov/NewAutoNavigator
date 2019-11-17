@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,7 +59,19 @@ public class EnginesRepositoryImpl implements EnginesRepository {
 
     @Override
     public List<Optional<Engine>> getAll() {
-        return null;
+        List<Optional<Engine>> engines = new ArrayList<>();
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("select * from car_engine");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                engines.add(Optional.ofNullable(rowMapper.mapRow(result)));
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        return engines;
     }
 
     @Override

@@ -197,10 +197,11 @@
                             Type
                         </button>
                         <span style="display: none;"></span></a></dt>
+                <dd id="active-type" class="active" style="display: none">
                 <#list types as type>
                     <div class="form-check" align="left">
                         <label for="type">
-                            <input type="checkbox" class="form-check-input" name="type-" id="type">${type.type}
+                            <input type="checkbox" class="form-check-input" name="type-'${type}'" id="type">${type}
                         </label>
                         <br>
                     </div>
@@ -212,10 +213,15 @@
                         </button>
                         <span style="display: none;"></span></a></dt>
                 <dd id="active-engine" class="active" style="display: none">
-                    <div id="year-container">
-                        <div class="slider-control">
-                            <label>Engine</label>
+                    <#list engines as engine>
+                        <div class="form-check" align="left">
+                            <label for="${engine.id}">
+                                <input type="checkbox" class="form-check-input" name="engine-${engine.id}"
+                                       id="${engine.id}">${engine.engineType}
+                            </label>
+                            <br>
                         </div>
+                    </#list>
                 </dd>
                 <dt><a href="#">
                         <button type="button" class="btn btn-secondary btn-lg btn-block"
@@ -232,17 +238,6 @@
                             <br>
                         </div>
                     </#list>
-                </dd>
-                <dt><a href="#">
-                        <button type="button" class="btn btn-secondary btn-lg btn-block"
-                                onclick="displayDD('active-perfomance')">Perfomance
-                        </button>
-                        <span style="display: none;"></span></a></dt>
-                <dd id="active-perfomance" class="active" style="display: none">
-                    <div id="year-container">
-                        <div class="slider-control">
-                            <label>Perfomance</label>
-                        </div>
                 </dd>
                 <dt><a href="#">
                         <button type="button" class="btn btn-secondary btn-lg btn-block"
