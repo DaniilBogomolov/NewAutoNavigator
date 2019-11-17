@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/adsfasfd")
+@WebFilter("/home")
 public class HomePageFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -22,7 +22,7 @@ public class HomePageFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-       /* HttpServletResponse response = (HttpServletResponse) servletResponse;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         HttpSession session = request.getSession();
@@ -35,6 +35,6 @@ public class HomePageFilter implements Filter {
                 request.setAttribute("user", cookie.getValue());
             }
         }
-        filterChain.doFilter(servletRequest, servletResponse);*/
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 }

@@ -6,10 +6,12 @@ import models.TransmissionType;
 import repository.interfaces.RowMapper;
 import repository.interfaces.TransmissionsRepository;
 
+import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,7 +60,19 @@ public class TransmissionsRepositoryImpl implements TransmissionsRepository {
 
     @Override
     public List<Optional<Transmission>> getAll() {
-        return null;
+        List<Optional<Transmission>> transmissions = new ArrayList<>();
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("select * from car_transmission");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                transmissions.add(Optional.ofNullable(rowMapper.mapRow(result)));
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        return transmissions;
     }
 
     @Override

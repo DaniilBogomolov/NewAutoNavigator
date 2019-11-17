@@ -1,8 +1,9 @@
 package repository.implementations;
 
 import helpers.Database;
-import models.Car;
+import models.*;
 import repository.interfaces.CarsRepository;
+import repository.interfaces.RowMapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class CarsRepositoryImpl implements CarsRepository {
+
+//    private RowMapper<Car> rowMapper = (row) -> {
+//
+//    };
+
 
     @Override
     public void save(Car model) {
@@ -50,7 +56,7 @@ public class CarsRepositoryImpl implements CarsRepository {
                     connection.prepareStatement("select * from car");
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-//                cars.add(Optional.ofNullabl)
+//                cars.add(rowMapper.mapRow(results));
             }
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -66,5 +72,10 @@ public class CarsRepositoryImpl implements CarsRepository {
     @Override
     public void delete(Long id) {
 
+    }
+
+    @Override
+    public List<CarType> getAllTypes() {
+        return null;
     }
 }

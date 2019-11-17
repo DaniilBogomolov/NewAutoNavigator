@@ -11,11 +11,15 @@ public class Car {
     private Transmission transmission;
     private Integer capacity;
     private CarType type;
-
+    private String imagePath;
 
     public Car(Long id, Maker maker, Model model, Integer year, Integer avgPrice, Engine engine, Transmission transmission, Integer capacity, CarType type) {
         this (maker, model, year, avgPrice, engine, transmission, capacity, type);
         this.id = id;
+    }
+
+    public Car(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public Car(Maker maker, Model model, Integer year, Integer avgPrice, Engine engine, Transmission transmission, Integer capacity, CarType type) {
@@ -27,6 +31,14 @@ public class Car {
         this.transmission = transmission;
         this.capacity = capacity;
         this.type = type;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public Long getId() {
