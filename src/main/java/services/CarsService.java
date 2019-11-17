@@ -12,6 +12,8 @@ public class CarsService {
     private String carsQuery = "select * from car";
     private boolean noClauses = true;
     private String lastClause = "";
+    private int openBrackets = 0;
+    private int closedBrackets = 0;
 
     private CarsRepository carsRepository;
 
@@ -23,14 +25,17 @@ public class CarsService {
     public void addClause(String type, String value) {
         StringBuilder builder = new StringBuilder(carsQuery);
         if (noClauses) {
-            builder.append(" where ");
+            builder.append(" where (");
+            openBrackets++;
             noClauses = false;
             lastClause = type;
         } else {
             if (lastClause.equals(type)) {
                 builder.append(" or ");
             } else {
-                builder.append(") and ");
+                builder.append(") and (");
+                openBrackets++;
+                closedBrackets++;
                 lastClause = type;
             }
         }
@@ -40,15 +45,24 @@ public class CarsService {
 
 
     public List<Car> getCars() {
-        System.out.println(carsQuery + " limit 4");
-        return carsRepository.getCarsWithCustomScript(carsQuery + " limit 4");
+        if (openBrackets != closedBrackets) {
+            System.out.println(carsQuery + ") limit 4");
+            return carsRepository.getCarsWithCustomScript(carsQuery + ") limit 4");
+        } else {
+            System.out.println(carsQuery);
+            return carsRepository.getCarsWithCustomScript(carsQuery);
+        }
     }
 
     public String getCarsQuery() {
         return carsQuery;
     }
 
-    public void setCarsQuery(String carsQuery) {
-        this.carsQuery = carsQuery;
+    public void clearQuery() {
+        carsQuery = "select * from car";
+        openBrackets = 0;
+        closedBrackets = 0;
+        lastClause = "";
+        noClauses = true;
     }
 }

@@ -35,8 +35,8 @@ public class TestServlet extends HttpServlet {
             service.addClause(parameterParts[0], parameterParts[1]);
         }
         List<Car> cars = service.getCars();
-        cars.stream().map(Car::getImagePath).forEach(System.out::println);
         req.getServletContext().setAttribute("cars", cars);
+        service.clearQuery();
         resp.sendRedirect("/home");
     }
 }
