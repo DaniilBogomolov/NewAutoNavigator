@@ -3,7 +3,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/carpage.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -122,4 +122,30 @@
         </div>
     </#if>
 </nav>
+<div id="container">
+    <div id="content">
+        <a href="/cars/${car.id}">
+            <#--                <img style="width: 80%" height="300px" src="../images/cars/Renault_Duster.png">-->
+
+            <img style="width: 100%" height="100%" src="../images/cars/${car.imagePath}">
+        </a>
+    </div>
+    <div id="menu">
+        <div id="top" style="float: top; height: 10%">
+            <br><br>
+            <h1>${car.maker.makerName} ${car.model.name}</h1></div>
+        <div id="model-info" style="float: bottom; height: 70%">
+            <ul>
+                <br><br>
+                <li>Maker: ${car.maker.makerName}</li><br>
+                <li>Year: ${car.year}</li><br>
+                <li>Transmission: ${car.transmission}</li><br>
+                <li>Engine type: ${car.engine}</li><br>
+                <li>Car type: ${car.type}</li><br>
+                <li>Capacity: ${car.capacity}</li><br>
+                <li>Average price: ${car.avgPrice} rub</li>
+            </ul>
+        </div>
+    </div>
+</div>
 </body>

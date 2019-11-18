@@ -2,8 +2,7 @@ package repository.implementations;
 
 import helpers.Database;
 import models.*;
-import repository.interfaces.CarsRepository;
-import repository.interfaces.RowMapper;
+import repository.interfaces.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,12 +14,40 @@ import java.util.Optional;
 
 public class CarsRepositoryImpl implements CarsRepository {
 
+    private ModelsRepository modelsRepository;
+    private MakersRepository makersRepository;
+    private EnginesRepository enginesRepository;
+    private TransmissionsRepository transmissionsRepository;
+
+    public CarsRepositoryImpl() {
+        makersRepository = new MakersRepositoryImpl();
+        modelsRepository = new ModelsRepositoryImpl();
+        enginesRepository = new EnginesRepositoryImpl();
+        transmissionsRepository = new TransmissionsRepositoryImpl();
+    }
+
     private RowMapper<Car> rowMapper = (row) -> {
         Long id = row.getLong("id");
+        Maker maker = makersRepository.get(row.getLong("maker_id")).get();
+        Model model = modelsRepository.get(row.getLong("model_id")).get();
+        Integer year = row.getInt("year");
+        Integer averagePrice = row.getInt("avg_price");
+        CarType type = CarType.valueOf(row.getString("type"));
+        Engine engine = enginesRepository.get(row.getLong("engine")).get();
+        Transmission transmission = transmissionsRepository.get(row.getLong("transmission")).get();
+        Integer capacity = row.getInt("capacity");
         String imagePath = row.getString("img_src");
         return new CarBuilder()
                 .setId(id)
+                .setMaker(maker)
+                .setModel(model)
+                .setYear(year)
                 .setImagePath(imagePath)
+                .setAvgPrice(averagePrice)
+                .setCapacity(capacity)
+                .setTransmission(transmission)
+                .setEngine(engine)
+                .setType(type)
                 .createCar();
     };
 
@@ -49,6 +76,18 @@ public class CarsRepositoryImpl implements CarsRepository {
 
     @Override
     public Optional<Car> get(Long id) {
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("select * from car where id = ?");
+            statement.setLong(1, id);
+            ResultSet car = statement.executeQuery();
+            if (car.next()) {
+                return Optional.ofNullable(rowMapper.mapRow(car));
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
         return Optional.empty();
     }
 
@@ -61,7 +100,7 @@ public class CarsRepositoryImpl implements CarsRepository {
                     connection.prepareStatement("select * from car");
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-//                cars.add(rowMapper.mapRow(results));
+                cars.add(Optional.ofNullable(rowMapper.mapRow(results)));
             }
         } catch (SQLException e) {
             throw new IllegalStateException(e);

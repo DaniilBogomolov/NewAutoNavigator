@@ -39,6 +39,18 @@ public class MakersRepositoryImpl implements MakersRepository {
 
     @Override
     public Optional<Maker> get(Long id) {
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("select * from car_maker where id = ?");
+            statement.setLong(1, id);
+            ResultSet maker = statement.executeQuery();
+            if (maker.next()) {
+                return Optional.ofNullable(rowMapper.mapRow(maker));
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
         return Optional.empty();
     }
 

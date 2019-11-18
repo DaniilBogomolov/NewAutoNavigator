@@ -54,42 +54,50 @@ nav {
 }
 
 #container {
+    text-align: center;
     background: #FFFFFF;
-    margin: 0;
-    width: max-content;
+    margin: auto auto;
+    width: 100%;
     height: 650px;
 }
 
 #menu {
-    float: left;
-    width: 864px;
-    height: 650px;
+    /*background: #40E0D0;*/
+    float: right;
+    width: 40%;
+    height: 100%;
+
 }
 #content {
-    background: #d2d0d2;
-    float: right;
-    width: 576px;
-    height: 650px;
+    /*background: #DCDCDC;*/
+    float: left;
+    width: 60%;
+    height: 100%;
+}
+td {
+    position: relative;
+    width: 50%;
+    height: 50%;
 }
 
-a {
-    letter-spacing: initial;
-    font-size: .85em;
-    font-family: "Roboto",Verdana,Helvetica,Sans-Serif;
-    display: block;
-    font-weight: bold;
-    outline: 0;
-    background-color: #e8e8e8;
-    color: #999;
-    border: none;
-    padding: .6em 0 .6em .6em;
-}
+/*a {*/
+/*    letter-spacing: initial;*/
+/*    font-size: .85em;*/
+/*    font-family: "Roboto",Verdana,Helvetica,Sans-Serif;*/
+/*    display: block;*/
+/*    font-weight: bold;*/
+/*    outline: 0;*/
+/*    background-color: #e8e8e8;*/
+/*    color: #999;*/
+/*    border: none;*/
+/*    padding: .6em 0 .6em .6em;*/
+/*}*/
 
-a:hover {
-    background-color: #e8e8e8;
-    color: #999;
-    text-decoration: underline;
-}
+/*a:hover {*/
+/*    background-color: #e8e8e8;*/
+/*    color: #999;*/
+/*    text-decoration: underline;*/
+/*}*/
 dt {
     font-size: .85em;
     color: #232323;
@@ -151,4 +159,29 @@ dl {
     margin-left: -230px;
     left: 230px;
     width: 230px;
+}
+
+.form-elegant .font-small {
+    font-size: 0.8rem; }
+
+.form-elegant .z-depth-1a {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+    box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25); }
+
+.form-elegant .z-depth-1-half,
+.form-elegant .btn:hover {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15); }
+
+.form-elegant .modal-header {
+    border-bottom: none; }
+
+.modal-dialog .form-elegant .btn .fab {
+    color: #2196f3!important; }
+
+.form-elegant .modal-body, .form-elegant .modal-footer {
+    font-weight: 400; }
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
 }

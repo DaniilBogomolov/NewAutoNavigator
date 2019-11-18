@@ -65,4 +65,10 @@ public class CarsService {
         lastClause = "";
         noClauses = true;
     }
+
+
+    public Car getFullCarInfoById(Long id) {
+        Car car = carsRepository.get(id).get();
+        return car;
+    }
 }

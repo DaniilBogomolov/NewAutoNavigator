@@ -67,6 +67,8 @@ public class HomePageServlet extends HttpServlet {
         if (request.getServletContext().getAttribute("cars") != null) {
             List<Car> cars = (List<Car>) request.getServletContext().getAttribute("cars");
             root.put("cars", cars);
+        } else {
+//            List<Car> cars =
         }
         root.put("engines", engines);
         root.put("capacities", capacity);

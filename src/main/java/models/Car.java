@@ -137,4 +137,20 @@ public class Car {
     public void setType(CarType type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", maker=" + maker +
+                ", model=" + model +
+                ", year=" + year +
+                ", avgPrice=" + avgPrice +
+                ", engine=" + engine +
+                ", transmission=" + transmission +
+                ", capacity=" + capacity +
+                ", type=" + type +
+                ", imagePath='" + imagePath + '\'' +
+                '}';
+    }
 }
