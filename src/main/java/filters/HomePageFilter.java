@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/home")
+@WebFilter(urlPatterns = {"/home", "/cars/*"})
 public class HomePageFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

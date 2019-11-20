@@ -13,25 +13,27 @@
             }
             document.getElementById(a).style.display = "block";
         }
+
         function updateTextInput(val) {
-            document.getElementById('textInput').value=val;
+            document.getElementById('textInput').value = val;
         }
     </script>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a href="#" style="all: initial; float: left; left: 20%;"><img src="../images/compass-icon.png" class="image-icon"></a>
+    <a href="/home" style="all: initial; float: left; left: 20%;"><img src="../images/compass-icon.png"
+                                                                       class="image-icon"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search model" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color: white;">Search</button>
-        </form>
+<#--        <form class="form-inline my-2 my-lg-0">-->
+<#--            <input class="form-control mr-sm-2" type="search" placeholder="Search model" aria-label="Search">-->
+<#--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color: white;">Search</button>-->
+<#--        </form>-->
     </div>
     <#if user??>
         <button type="button" class="btn btn-link" style="color: white;">${user.username}</button>
@@ -151,11 +153,11 @@
                     <div id="year-container">
                         <div class="slider-control"><label>Year</label>
                             <div>
-<#--                                <label for="year">Year</label>-->
-<#--                                <input type="range" id="start" name="year-"-->
-<#--                                       min="2002" max="2019">-->
-<#--                                <input type="range" name="year-" min="2002" max="2019" onchange="updateTextInput(this.value);">-->
-<#--                                <input type="text" name="year-" id="textInput" value="">-->
+                                <#--                                <label for="year">Year</label>-->
+                                <#--                                <input type="range" id="start" name="year-"-->
+                                <#--                                       min="2002" max="2019">-->
+                                <#--                                <input type="range" name="year-" min="2002" max="2019" onchange="updateTextInput(this.value);">-->
+                                <#--                                <input type="text" name="year-" id="textInput" value="">-->
                             </div>
                         </div>
                     </div>
@@ -198,14 +200,14 @@
                         </button>
                         <span style="display: none;"></span></a></dt>
                 <dd id="active-type" class="active" style="display: none">
-                <#list types as type>
-                    <div class="form-check" align="left">
-                        <label for="type">
-                            <input type="checkbox" class="form-check-input" name="type-'${type}'" id="type">${type}
-                        </label>
-                        <br>
-                    </div>
-                </#list>
+                    <#list types as type>
+                        <div class="form-check" align="left">
+                            <label for="type">
+                                <input type="checkbox" class="form-check-input" name="type-'${type}'" id="type">${type}
+                            </label>
+                            <br>
+                        </div>
+                    </#list>
                 </dd>
                 <dt><a href="#">
                         <button type="button" class="btn btn-secondary btn-lg btn-block"
@@ -263,12 +265,13 @@
     <div id="content">
         <#if cars??>
             <div id="top-left" style="float: left; height: 50%; width: 50%"><#if cars[0]??>
-                <a href="/cars/${cars[0].id}">
-                <#--                <img style="width: 80%" height="300px" src="../images/cars/Renault_Duster.png">-->
+                    <a href="/cars/${cars[0].id}">
+                        <#--                <img style="width: 80%" height="300px" src="../images/cars/Renault_Duster.png">-->
 
-                    <img style="width: 80%" height="300px" src="../images/cars/${cars[0].imagePath}">
+                        <img style="width: 80%" height="300px" src="../images/cars/${cars[0].imagePath}">
 
-                    </a></#if>
+                    </a>
+                </#if>
             </div>
             <div id="top-right" style="float: right; height: 50%; width: 50%"><#if cars[1]??>
                 <a href="/cars/${cars[1].id}">
@@ -290,6 +293,31 @@
                         <img style="width: 80%" height="300px" src="../images/cars/${cars[3].imagePath}">
                     </a>
                 </#if>
+            </div>
+        <#else>
+            <div id="top-left" style="float: left; height: 50%; width: 50%">
+                <a href="/cars/12">
+
+                    <img style="width: 80%" height="300px" src="../images/cars/Chevrolet_Niva.png">
+                </a>
+            </div>
+
+            <div id="top-right" style="float: left; height: 50%; width: 50%">
+                <a href="/cars/5">
+
+                    <img style="width: 80%" height="300px" src="../images/cars/Toyota_RAV4.png">
+                </a>
+            </div>
+            <div id="bottom-left" style="float: left; height: 50%; width: 50%">
+                <a href="/cars/6">
+
+                    <img style="width: 80%" height="300px" src="../images/cars/Toyota_Camry.png">
+                </a>
+            </div>
+            <div id="bottom-right" style="float: left; height: 50%; width: 50%">
+                <a href="/cars/26">
+                    <img style="width: 80%" height="300px" src="../images/cars/BMW_M5.png">
+                </a>
             </div>
         </#if>
     </div>

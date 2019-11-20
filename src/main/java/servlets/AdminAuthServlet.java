@@ -51,6 +51,8 @@ public class AdminAuthServlet extends HttpServlet {
             if (user.get().getPassword().equals(password) && user.get().getRole().equals(Role.ADMIN)) {
                 req.getSession().setAttribute("user", "adminUser");
                 resp.sendRedirect("/admin/manage/addcar");
+            } else {
+                resp.sendRedirect("/admin/manage");
             }
         } else {
             resp.sendRedirect("/admin/manage");

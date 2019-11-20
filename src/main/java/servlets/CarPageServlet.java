@@ -5,6 +5,7 @@ import helpers.Config;
 import models.Car;
 import models.CarBuilder;
 import models.Model;
+import models.User;
 import services.CarsService;
 
 import javax.servlet.ServletException;
@@ -35,13 +36,17 @@ public class CarPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Map<String, Object> root = new HashMap<>();
+        String userName = (String) request.getAttribute("user");
+        if (userName != null) {
+            root.put("user", new User(userName));
+        }
         Pattern pattern = Pattern.compile(REGEX_FOR_CAR_ID);
         Matcher matcher = pattern.matcher(request.getRequestURI());
         Long id = null;
         if (matcher.find()) {
             id = Long.parseLong(matcher.group(1));
         }
-        Map<String, Object> root = new HashMap<>();
         Car car = carsService.getFullCarInfoById(id);
         System.out.println(car);
         root.put("car", car);
