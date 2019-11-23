@@ -48,6 +48,7 @@ public class ModelsRepositoryImpl implements ModelsRepository {
             if (result.next()) {
                 model = rowMapper.mapRow(result);
             }
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -81,6 +82,7 @@ public class ModelsRepositoryImpl implements ModelsRepository {
             if (engine.next()) {
                 return rowMapper.mapRow(engine);
             }
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);

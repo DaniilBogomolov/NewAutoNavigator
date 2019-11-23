@@ -31,8 +31,14 @@ public class TestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Enumeration<String> parameters = req.getParameterNames();
         while (parameters.hasMoreElements()) {
-            String[] parameterParts = parameters.nextElement().split("-");
-            service.addClause(parameterParts[0], parameterParts[1]);
+            String parameter = parameters.nextElement();
+            if (parameter.equals("avg_price") || parameter.equals("year")) {
+                String values = req.getParameter(parameter);
+                service.addClause(parameter, values);
+            } else {
+                String[] parameterParts = parameter.split("-");
+                service.addClause(parameterParts[0], parameterParts[1]);
+            }
         }
         List<Car> cars = service.getCars();
         req.getServletContext().setAttribute("cars", cars);

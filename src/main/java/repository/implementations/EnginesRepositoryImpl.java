@@ -50,6 +50,7 @@ public class EnginesRepositoryImpl implements EnginesRepository {
             if (result.next()) {
                 engine = rowMapper.mapRow(result);
             }
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -68,6 +69,8 @@ public class EnginesRepositoryImpl implements EnginesRepository {
             while (result.next()) {
                 engines.add(Optional.ofNullable(rowMapper.mapRow(result)));
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -95,6 +98,7 @@ public class EnginesRepositoryImpl implements EnginesRepository {
             if (engine.next()) {
                 return rowMapper.mapRow(engine);
             }
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);

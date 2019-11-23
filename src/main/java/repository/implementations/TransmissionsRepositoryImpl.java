@@ -51,6 +51,7 @@ public class TransmissionsRepositoryImpl implements TransmissionsRepository {
             if (result.next()) {
                 transmission = rowMapper.mapRow(result);
             }
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -69,6 +70,8 @@ public class TransmissionsRepositoryImpl implements TransmissionsRepository {
             while (result.next()) {
                 transmissions.add(Optional.ofNullable(rowMapper.mapRow(result)));
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -96,6 +99,7 @@ public class TransmissionsRepositoryImpl implements TransmissionsRepository {
             if (engine.next()) {
                 return rowMapper.mapRow(engine);
             }
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);

@@ -37,6 +37,7 @@ public class UsersRepositoryImpl implements UsersRepository {
             statement.setString(3, model.getRole().name());
             statement.executeUpdate();
             statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -55,6 +56,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                 user = rowMapper.mapRow(result);
             }
             statement.close();
+            connection.close();
             return Optional.ofNullable(user);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -73,6 +75,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                 users.add(Optional.ofNullable(rowMapper.mapRow(usersResultSet)));
             }
             statement.close();
+            connection.close();
             return users;
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -101,6 +104,8 @@ public class UsersRepositoryImpl implements UsersRepository {
             if (resultSet.next()) {
                 user = rowMapper.mapRow(resultSet);
             }
+            statement.close();
+            connection.close();
             return Optional.ofNullable(user);
         } catch (SQLException e) {
             throw new IllegalStateException(e);

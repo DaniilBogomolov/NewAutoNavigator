@@ -85,6 +85,8 @@ public class CarsRepositoryImpl implements CarsRepository {
             if (car.next()) {
                 return Optional.ofNullable(rowMapper.mapRow(car));
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -102,6 +104,8 @@ public class CarsRepositoryImpl implements CarsRepository {
             while (results.next()) {
                 cars.add(Optional.ofNullable(rowMapper.mapRow(results)));
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -130,6 +134,8 @@ public class CarsRepositoryImpl implements CarsRepository {
                 Car car = rowMapper.mapRow(result);
                 cars.add(car);
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }

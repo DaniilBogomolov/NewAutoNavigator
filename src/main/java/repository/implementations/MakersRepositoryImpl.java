@@ -48,6 +48,8 @@ public class MakersRepositoryImpl implements MakersRepository {
             if (maker.next()) {
                 return Optional.ofNullable(rowMapper.mapRow(maker));
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -94,6 +96,7 @@ public class MakersRepositoryImpl implements MakersRepository {
             if (engine.next()) {
                 return rowMapper.mapRow(engine);
             }
+            statement.close();
             connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);

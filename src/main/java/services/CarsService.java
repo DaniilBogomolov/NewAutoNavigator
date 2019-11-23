@@ -39,7 +39,15 @@ public class CarsService {
                 lastClause = type;
             }
         }
-        builder.append(type).append(" = ").append(value);
+        if (type.equals("avg_price") || type.equals("year")) {
+            String[] numsValues = value.split(" - ");
+            Integer firstInt = Integer.parseInt(numsValues[0]);
+            Integer secondInt = Integer.parseInt(numsValues[1]);
+            builder.append(type).append(" <= ").append(secondInt).append(" and ")
+                    .append(type).append(" >= ").append(firstInt);
+        } else {
+            builder.append(type).append(" = ").append(value);
+        }
         carsQuery = builder.toString();
     }
 

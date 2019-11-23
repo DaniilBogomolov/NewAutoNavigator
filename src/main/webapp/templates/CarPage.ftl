@@ -138,7 +138,7 @@
             <ul>
                 <br><br>
                 <li>Maker: ${car.maker.makerName}</li><br>
-                <li>Year: ${car.year}</li><br>
+                <li>Year: ${car.year?int?c}</li><br>
                 <li>Transmission: ${car.transmission}</li><br>
                 <li>Engine type: ${car.engine}</li><br>
                 <li>Car type: ${car.type}</li><br>

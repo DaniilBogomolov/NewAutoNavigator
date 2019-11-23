@@ -5,6 +5,11 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         function displayDD(a) {
             var c = document.getElementsByClassName("active");
@@ -17,6 +22,36 @@
         function updateTextInput(val) {
             document.getElementById('textInput').value = val;
         }
+    </script>
+    <script>
+        $( function() {
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 62300000,
+                values: [ 0, 62300000 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+                }
+            });
+            $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +
+                " - " + $( "#slider-range" ).slider( "values", 1 ) );
+        } );
+    </script>
+    <script>
+        $( function() {
+            $( "#slider" ).slider({
+                range: true,
+                min: 2002,
+                max: 2019,
+                values: [ 2002, 2019 ],
+                slide: function( event, ui ) {
+                    $( "#am" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+                }
+            });
+            $( "#am" ).val($( "#slider" ).slider( "values", 0 ) +
+                " - " + $( "#slider" ).slider( "values", 1 ) );
+        } );
     </script>
 </head>
 
@@ -150,17 +185,11 @@
                         </button>
                         <span style="display: none;"></span></a></dt>
                 <dd id="active-year" class="active" style="display: none">
-                    <div id="year-container">
-                        <div class="slider-control"><label>Year</label>
-                            <div>
-                                <#--                                <label for="year">Year</label>-->
-                                <#--                                <input type="range" id="start" name="year-"-->
-                                <#--                                       min="2002" max="2019">-->
-                                <#--                                <input type="range" name="year-" min="2002" max="2019" onchange="updateTextInput(this.value);">-->
-                                <#--                                <input type="text" name="year-" id="textInput" value="">-->
-                            </div>
-                        </div>
-                    </div>
+                    <p>
+                        <label for="amount">Year range:</label>
+                        <input type="text" name="year" id="am" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                    </p>
+                    <div id="slider"></div>
                 </dd>
                 <#--            Make-->
                 <dt><a href="#">
@@ -187,10 +216,11 @@
                         </button>
                         <span style="display: none;"></span></a></dt>
                 <dd id="active-price" class="active" style="display: none">
-                    <div class="form-group">
-                        <label for="formControlRange">0 to 62300000</label>
-                        <input type="range" class="form-control-range" id="formControlRange">
-                    </div>
+                    <p>
+                        <label for="amount">Price range:</label>
+                        <input type="text" name="avg_price" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                    </p>
+                    <div id="slider-range"></div>
                 </dd>
                 <#--            Type-->
                 <dt><a href="#">
@@ -323,13 +353,6 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
