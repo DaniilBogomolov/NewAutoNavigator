@@ -6,6 +6,8 @@ import models.Car;
 import models.CarBuilder;
 import models.Model;
 import models.User;
+import repository.implementations.UsersRepositoryImpl;
+import repository.interfaces.UsersRepository;
 import services.CarsService;
 
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ import java.util.regex.Pattern;
 @WebServlet(urlPatterns = "/cars/*")
 public class CarPageServlet extends HttpServlet {
 
+    private UsersRepository usersRepository;
     private CarsService carsService;
     private static final String REGEX_FOR_CAR_ID = ".*\\/([0-9]+)";
 
@@ -32,24 +35,32 @@ public class CarPageServlet extends HttpServlet {
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
         getServletContext().setAttribute("cfg", cfg);
         carsService = new CarsService();
+        usersRepository = new UsersRepositoryImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, Object> root = new HashMap<>();
-        String userName = (String) request.getAttribute("user");
-        if (userName != null) {
-            root.put("user", new User(userName));
-        }
         Pattern pattern = Pattern.compile(REGEX_FOR_CAR_ID);
         Matcher matcher = pattern.matcher(request.getRequestURI());
         Long id = null;
         if (matcher.find()) {
             id = Long.parseLong(matcher.group(1));
         }
+        Map<String, Object> root = new HashMap<>();
+        String userName = (String) request.getAttribute("user");
+        if (userName != null) {
+            root.put("user", new User(userName));
+            boolean isInFavourite = usersRepository.getUserByUsername(userName).get().getFavouriteCars().contains(id.intValue());
+            if (isInFavourite) {
+                root.put("src", "../images/star-solid.svg");
+            } else {
+                root.put("src", "../images/star-regular.svg");
+            }
+        }
         Car car = carsService.getFullCarInfoById(id);
         System.out.println(car);
         root.put("car", car);
+
         response.setContentType("text/html");
         Config.render(request, response, "CarPage.ftl", root);
     }

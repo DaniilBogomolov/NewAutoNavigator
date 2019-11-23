@@ -1,15 +1,14 @@
 package repository.implementations;
 
+import helpers.Database;
 import models.Role;
 import models.User;
 import repository.interfaces.RowMapper;
 import repository.interfaces.UsersRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +19,8 @@ public class UsersRepositoryImpl implements UsersRepository {
       String username = row.getString("username");
       String password = row.getString("password");
       Role role = Enum.valueOf(Role.class, row.getString("role"));
-      return new User(username, password, id, role);
+      List<Integer> cars = new ArrayList<>(Arrays.asList((Integer[])row.getArray("favourite_cars").getArray()));
+      return new User(username, password, id, role, cars);
     };
 
     public UsersRepositoryImpl() {
@@ -107,6 +107,28 @@ public class UsersRepositoryImpl implements UsersRepository {
             statement.close();
             connection.close();
             return Optional.ofNullable(user);
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @Override
+    public void changeFavouriteCars(String action, Integer cardID, String username) {
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement statement;
+            if (action.equals("add")) {
+                statement = connection.prepareStatement("update client set favourite_cars = (select favourite_cars || ? from client where username = ?) where username = ?;");
+            } else {
+                statement = connection.
+                        prepareStatement("update client set favourite_cars = (select array_remove(favourite_cars, ?) from client where username = ?) where username = ?;");
+            }
+            statement.setInt(1, cardID);
+            statement.setString(2, username);
+            statement.setString(3, username);
+            statement.execute();
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }

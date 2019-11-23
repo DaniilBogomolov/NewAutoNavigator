@@ -28,8 +28,6 @@ public class SignInServlet extends HttpServlet {
 
         Optional<User> possibleUser = usersRepository.getUserByUsername(username);
         if (possibleUser.isPresent()) {
-            System.out.println(password);
-            System.out.println(username);
             if (password.equals(possibleUser.get().getPassword())) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", username);
