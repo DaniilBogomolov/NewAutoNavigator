@@ -7,7 +7,7 @@ public class User {
     private String password;
     private Long id;
     private Role role;
-    private List<Integer> favouriteCars;
+    private List<Car> favouriteCars;
 
     public User(String username, String password, Long id) {
         this.username = username;
@@ -28,7 +28,7 @@ public class User {
         this.role = role;
     }
 
-    public User(String username, String password, Long id, Role role, List<Integer> favouriteCars) {
+    public User(String username, String password, Long id, Role role, List<Car> favouriteCars) {
         this.username = username;
         this.password = password;
         this.id = id;
@@ -56,11 +56,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Integer> getFavouriteCars() {
+    public List<Car> getFavouriteCars() {
         return favouriteCars;
     }
 
-    public void setFavouriteCars(List<Integer> favouriteCars) {
+    public void setFavouriteCars(List<Car> favouriteCars) {
         this.favouriteCars = favouriteCars;
     }
 

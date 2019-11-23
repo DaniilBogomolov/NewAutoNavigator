@@ -41,7 +41,23 @@
 <#--        </form>-->
     </div>
     <#if user??>
-        <button id="userButton" name = "${user.username}" type="button" class="btn btn-link" style="color: white;">${user.username}</button>
+        <div class="modal fade" id="carsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Your favourite cars: </h1>
+                    </div>
+                    <div class="modal-body">
+                        <#list favourite_cars as car>
+                            <a href="/cars/${car.id}">
+                                ${car.maker.makerName} ${car.model.name}
+                            </a><br>
+                        </#list>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button data-toggle="modal" data-target="#carsModal" id="userButton" name = "${user.username}" type="button" class="btn btn-link" style="color: white;">${user.username}</button>
     <#else>
         <!-- Modal -->
         <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -82,6 +98,8 @@
                                     in
                                 </button>
                             </div>
+                            <input name="originPage" value="/cars/${car.id}" style="display: none">
+
                         </div>
                 </div>
                 </form>
@@ -119,9 +137,11 @@
                                 <input type="password" name="password" id="Form-pass1" class="form-control validate">
                                 <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
                             </div>
+                            <input name="originPage" value="/cars/${car.id}" style="display: none">
+
 
                             <div class="text-center mb-3">
-                                <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a">Sign
+                                <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="color: white">Sign
                                     up
                                 </button>
                             </div>
@@ -134,12 +154,12 @@
         <!-- Modal -->
 
         <div class="text-center">
-            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#elegantModalForm">Sign
+            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#elegantModalForm" style="color: white">Sign
                 In</a>
         </div>
 
         <div class="text-center">
-            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#SignUpForm">Sign Up</a>
+            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#SignUpForm" style="color: white">Sign Up</a>
         </div>
     </#if>
 </nav>

@@ -36,7 +36,7 @@ public class SignInServlet extends HttpServlet {
                     cookie.setMaxAge(99999999);
                     resp.addCookie(cookie);
                 }
-                resp.sendRedirect("/home");
+                resp.sendRedirect(req.getParameter("originPage"));
             } else {
                 throw new IllegalArgumentException();
             }

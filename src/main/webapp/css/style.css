@@ -101,7 +101,7 @@ td {
 dt {
     font-size: .85em;
     color: #232323;
-    background-color: #fff;
+    background-color: lightgrey;
     margin: 0;
     padding: 0;
     letter-spacing: initial;
@@ -112,7 +112,6 @@ dt {
     margin: 0 0 1px 0;
     margin: 0;
     font-family: "Roboto",Verdana,Helvetica,Sans-Serif;
-    background: #fff;
     display: block;
 }
 dd {

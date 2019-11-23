@@ -71,7 +71,23 @@
 <#--        </form>-->
     </div>
     <#if user??>
-        <button type="button" class="btn btn-link" style="color: white;">${user.username}</button>
+        <div class="modal fade" id="carsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Your favourite cars: </h1>
+                    </div>
+                    <div class="modal-body">
+                        <#list favourite_cars as car>
+                            <a href="/cars/${car.id}">
+                                ${car.maker.makerName} ${car.model.name}
+                            </a><br>
+                        </#list>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#carsModal" style="color: white;">${user.username}</button>
     <#else>
         <!-- Modal -->
         <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -112,6 +128,8 @@
                                     in
                                 </button>
                             </div>
+
+                            <input name="originPage" value="/home" style="display: none">
                         </div>
                 </div>
                 </form>
@@ -149,6 +167,7 @@
                                 <input type="password" name="password" id="Form-pass1" class="form-control validate">
                                 <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
                             </div>
+                            <input name="originPage" value="/home" style="display: none">
 
                             <div class="text-center mb-3">
                                 <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a">Sign
@@ -164,12 +183,12 @@
         <!-- Modal -->
 
         <div class="text-center">
-            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#elegantModalForm">Sign
+            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#elegantModalForm" style="color: white">Sign
                 In</a>
         </div>
 
         <div class="text-center">
-            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#SignUpForm">Sign Up</a>
+            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#SignUpForm" style="color: white">Sign Up</a>
         </div>
     </#if>
 </nav>
@@ -178,9 +197,9 @@
     <form method="post" action="/test">
         <div id="menu">
             <dl>
-                <dt><a href="#">
-                        <button id="menuButton" type="button" class="btn btn-secondary btn-lg btn-block"
-                                onclick="displayDD('active-year')">
+                <dt style= "outline: 1px solid #000000; background-color: lightgrey"><a href="#">
+                        <button id="menuButton" type="button" class="btn btn-link btn-lg btn-block"
+                                onclick="displayDD('active-year')" style="background-color: lightgrey; color: black; border: none">
                             Year
                         </button>
                         <span style="display: none;"></span></a></dt>
@@ -192,9 +211,9 @@
                     <div id="slider"></div>
                 </dd>
                 <#--            Make-->
-                <dt><a href="#">
+                <dt style="background-color: lightgrey; outline: 1px solid #000000;"><a href="#">
                         <button type="button" class="btn btn-secondary btn-lg btn-block"
-                                onclick="displayDD('active-make')">
+                                onclick="displayDD('active-make')" style="background-color: lightgrey; color: black; border: none">
                             Make
                         </button>
                         <span style="display: none;"></span></a></dt>
@@ -210,9 +229,9 @@
                     </#list>
                 </dd>
                 <#--Price-->
-                <dt><a href="#">
+                <dt style="background-color: lightgrey; outline: 1px solid #000000;"><a href="#">
                         <button type="button" class="btn btn-secondary btn-lg btn-block"
-                                onclick="displayDD('active-price')">Price
+                                onclick="displayDD('active-price')" style="background-color: lightgrey; color: black; border: none">Price
                         </button>
                         <span style="display: none;"></span></a></dt>
                 <dd id="active-price" class="active" style="display: none">
@@ -223,9 +242,9 @@
                     <div id="slider-range"></div>
                 </dd>
                 <#--            Type-->
-                <dt><a href="#">
+                <dt style="background-color: lightgrey; outline: 1px solid #000000;"><a href="#">
                         <button type="button" class="btn btn-secondary btn-lg btn-block"
-                                onclick="displayDD('active-type')">
+                                onclick="displayDD('active-type')" style="background-color: lightgrey; color: black; border: none">
                             Type
                         </button>
                         <span style="display: none;"></span></a></dt>
@@ -239,9 +258,9 @@
                         </div>
                     </#list>
                 </dd>
-                <dt><a href="#">
+                <dt style="background-color: lightgrey; outline: 1px solid #000000;"><a href="#">
                         <button type="button" class="btn btn-secondary btn-lg btn-block"
-                                onclick="displayDD('active-engine')">Engine
+                                onclick="displayDD('active-engine')" style="background-color: lightgrey; color: black; border: none">Engine
                         </button>
                         <span style="display: none;"></span></a></dt>
                 <dd id="active-engine" class="active" style="display: none">
@@ -255,9 +274,9 @@
                         </div>
                     </#list>
                 </dd>
-                <dt><a href="#">
+                <dt style="background-color: lightgrey; outline: 1px solid #000000;"><a href="#">
                         <button type="button" class="btn btn-secondary btn-lg btn-block"
-                                onclick="displayDD('active-transmission')">Transmission
+                                onclick="displayDD('active-transmission')" style="background-color: lightgrey; color: black; border: none">Transmission
                         </button>
                         <span style="display: none;"></span></a></dt>
                 <dd id="active-transmission" class="active" style="display: none">
@@ -271,9 +290,9 @@
                         </div>
                     </#list>
                 </dd>
-                <dt><a href="#">
+                <dt style="background-color: lightgrey; outline: 1px solid #000000;"><a href="#">
                         <button type="button" class="btn btn-secondary btn-lg btn-block"
-                                onclick="displayDD('active-capacity')">Capacity
+                                onclick="displayDD('active-capacity')" style="background-color: lightgrey; color: black; border: none">Capacity
                         </button>
                         <span style="display: none;"></span></a></dt>
                 <dd id="active-capacity" class="active" style="display: none">
@@ -303,7 +322,7 @@
                     </a>
                 </#if>
             </div>
-            <div id="top-right" style="float: right; height: 50%; width: 50%"><#if cars[1]??>
+            <div id="top-right" style="float: right; height: 50%; width: 50%;"><#if cars[1]??>
                 <a href="/cars/${cars[1].id}">
                 <#--                <img style="width: 80%" height="300px" src="../images/cars/Kia_Rio.png">-->
 

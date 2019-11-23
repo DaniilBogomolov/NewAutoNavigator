@@ -17,9 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = "/cars/*")
 public class CarPageServlet extends HttpServlet {
@@ -50,15 +52,17 @@ public class CarPageServlet extends HttpServlet {
         String userName = (String) request.getAttribute("user");
         if (userName != null) {
             root.put("user", new User(userName));
-            boolean isInFavourite = usersRepository.getUserByUsername(userName).get().getFavouriteCars().contains(id.intValue());
+            List<Car> favouriteCars = usersRepository.getUserByUsername(userName).get().getFavouriteCars();
+            boolean isInFavourite = favouriteCars.stream()
+                    .map(Car::getId).collect(Collectors.toList()).contains(id);
             if (isInFavourite) {
                 root.put("src", "../images/star-solid.svg");
             } else {
                 root.put("src", "../images/star-regular.svg");
             }
+            root.put("favourite_cars", favouriteCars);
         }
         Car car = carsService.getFullCarInfoById(id);
-        System.out.println(car);
         root.put("car", car);
 
         response.setContentType("text/html");

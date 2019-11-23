@@ -1,8 +1,10 @@
 package repository.implementations;
 
 import helpers.Database;
+import models.Car;
 import models.Role;
 import models.User;
+import repository.interfaces.CarsRepository;
 import repository.interfaces.RowMapper;
 import repository.interfaces.UsersRepository;
 
@@ -11,19 +13,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UsersRepositoryImpl implements UsersRepository {
+
+    private CarsRepository carsRepository;
 
     private RowMapper<User> rowMapper = (row) -> {
       Long id = row.getLong("id");
       String username = row.getString("username");
       String password = row.getString("password");
       Role role = Enum.valueOf(Role.class, row.getString("role"));
-      List<Integer> cars = new ArrayList<>(Arrays.asList((Integer[])row.getArray("favourite_cars").getArray()));
+      List<Integer> carsID = new ArrayList<>(Arrays.asList((Integer[])row.getArray("favourite_cars").getArray()));
+      List<Car> cars = carsID.stream().map(carID -> carsRepository.get(carID.longValue())).map(Optional::get).collect(Collectors.toList());
       return new User(username, password, id, role, cars);
     };
 
     public UsersRepositoryImpl() {
+        carsRepository = new CarsRepositoryImpl();
     }
 
     @Override

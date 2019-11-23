@@ -36,5 +36,6 @@ public class AjaxServlet extends HttpServlet {
         }
         resp.setContentType("text/json");
         resp.getWriter().write(object.toString());
+//        resp.sendRedirect("req.getRequestURI()");
     }
 }

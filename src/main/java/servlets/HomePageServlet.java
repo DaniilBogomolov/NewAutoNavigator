@@ -3,14 +3,8 @@ package servlets;
 import freemarker.template.TemplateExceptionHandler;
 import helpers.Config;
 import models.*;
-import repository.implementations.CarsRepositoryImpl;
-import repository.implementations.EnginesRepositoryImpl;
-import repository.implementations.TransmissionsRepositoryImpl;
-import repository.interfaces.CarsRepository;
-import repository.interfaces.EnginesRepository;
-import repository.interfaces.MakersRepository;
-import repository.implementations.MakersRepositoryImpl;
-import repository.interfaces.TransmissionsRepository;
+import repository.implementations.*;
+import repository.interfaces.*;
 import services.CarsService;
 
 import javax.servlet.ServletException;
@@ -33,6 +27,7 @@ public class HomePageServlet extends HttpServlet {
     private TransmissionsRepository transmissionsRepository;
     private CarsService carsService;
     private EnginesRepository enginesRepository;
+    private UsersRepository usersRepository;
 
     @Override
     public void init() {
@@ -45,6 +40,7 @@ public class HomePageServlet extends HttpServlet {
         carsService = new CarsService();
         transmissionsRepository = new TransmissionsRepositoryImpl();
         enginesRepository = new EnginesRepositoryImpl();
+        usersRepository = new UsersRepositoryImpl();
     }
 
     @Override
@@ -54,6 +50,7 @@ public class HomePageServlet extends HttpServlet {
         String userName = (String) request.getAttribute("user");
         if (userName != null) {
             root.put("user", new User(userName));
+            root.put("favourite_cars", usersRepository.getUserByUsername(userName).get().getFavouriteCars());
         }
         List<Maker> makers = makersRepository.getAll().stream().filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
         List<CarType> types = Stream.of(CarType.SEDAN, CarType.CROSSOVER, CarType.CONVERTIBLE, CarType.COUPE, CarType.VAN, CarType.WAGON, CarType.TRUCK, CarType.HATCHBACK)
